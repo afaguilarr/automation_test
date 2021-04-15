@@ -17,7 +17,8 @@ Your site is now running at `http://localhost:8000`!
 
 ## 📝 Requirements
 
-### Test the site using Cypress or Selenium, feel free to choose what you consider important (useful) to automate
-###### Bonus if you leave comments on your code
-### Provide your automation tests to our recruitment team (github link from your personal github / gitlab account) OR zip file in absence of that
+1. **Test the site using Cypress or Selenium, feel free to choose what you consider important (useful) to automate**
 
+Bonus if you leave comments on your code
+
+2. **Provide your automation tests to our recruitment team (github link from your personal github / gitlab account) OR zip file**
