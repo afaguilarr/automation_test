@@ -32,18 +32,18 @@ bower_components
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
 
-# Dependency directories
+# Dependency directories and files
 node_modules
 jspm_packages
 **/node_modules/**
+yarn.lock
+**/yarn.lock
 
 # Typescript v1 declaration files
 typings/
 
 # Optional npm cache directory
 .npm
-yarn.lock
-**/yarn.lock
 
 # Optional eslint cache
 .eslintcache
@@ -69,3 +69,7 @@ public
 .idea
 .vscode
 .DS_Store
+
+# Cypress tests results files and directories
+**/videos
+**/screenshots

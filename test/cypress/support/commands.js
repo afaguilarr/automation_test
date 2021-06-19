@@ -42,6 +42,6 @@ Cypress.Commands.add('clickLayoutElement', (layoutElement) => {
 })
 
 Cypress.Commands.add('pageIsShown', (url) => {
-    url = url.startsWith('/') ? "http://localhost:8000" + url : url
+    url = url.startsWith('/') ? Cypress.config().baseUrl + url : url
     cy.url().should('eq', url)
 })

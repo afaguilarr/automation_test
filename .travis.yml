@@ -1,0 +1,16 @@
+env:
+  - DOCKER_COMPOSE_VERSION=1.29.0
+
+jobs:
+  include:
+    - stage: docker-compose build
+      script: docker-compose build
+    - stage: UI build
+      script: docker-compose up webapp
+    - stage: Tests
+      name: "Chrome"
+      script: BROWSER=chrome docker-compose up cypress
+    - name: "Electron"
+      script: BROWSER=electron docker-compose up cypress
+    - name: "Firefox"
+      script: BROWSER=firefox docker-compose up cypress
