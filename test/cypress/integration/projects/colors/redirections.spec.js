@@ -1,11 +1,15 @@
-context('HomePage Redirections', () => {
+context('Colors Redirections', () => {
     beforeEach(() => {
-        // Given the home page is shown
-        cy.visit('/')
+        // Given the Colors page is shown
+        cy.visit('/color-in-all-its-glory')
     });
 
     // This list parametrizes the test case below and basically represents our gherkin table
     [
+        {
+            navigationItem: "Logo",
+            page: "/"
+        },
         {
             navigationItem: "Projects",
             page: "/projects"
@@ -43,38 +47,6 @@ context('HomePage Redirections', () => {
         it(`The ${scenario.footerItem} footer item redirects to the expected location`, () => {
             // When a visitor clicks on the <footer_item> footer item
             cy.clickFooterItem(scenario.footerItem)
-
-            // Then the <page> page is shown
-            cy.pageIsShown(scenario.page)
-        })
-    });
-
-    // This list parametrizes the test case below and basically represents our gherkin table
-    [
-        {
-            layoutElement: "About",
-            page: "/about"
-        },
-        {
-            layoutElement: "Instagram",
-            page: "/instagram"
-        },
-        {
-            layoutElement: "Color",
-            page: "/color-in-all-its-glory"
-        },
-        {
-            layoutElement: "Extreme Neon",
-            page: "/extreme-neon-what-is-this-trend-about"
-        },
-        {
-            layoutElement: "Breakfast",
-            page: "/breakfast"
-        }
-    ].forEach((scenario) => {
-        it(`The ${scenario.layoutElement} layout element redirects to the expected location`, () => {
-            // When a visitor clicks on the <layout_element> layout element
-            cy.clickLayoutElement(scenario.layoutElement)
 
             // Then the <page> page is shown
             cy.pageIsShown(scenario.page)

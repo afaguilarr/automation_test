@@ -1,14 +1,14 @@
-context('HomePage Redirections', () => {
+context('Projects Redirections', () => {
     beforeEach(() => {
-        // Given the home page is shown
-        cy.visit('/')
+        // Given the Projects page is shown
+        cy.visit('/projects')
     });
 
     // This list parametrizes the test case below and basically represents our gherkin table
     [
         {
-            navigationItem: "Projects",
-            page: "/projects"
+            navigationItem: "Logo",
+            page: "/"
         },
         {
             navigationItem: "Instagram",
@@ -52,14 +52,6 @@ context('HomePage Redirections', () => {
     // This list parametrizes the test case below and basically represents our gherkin table
     [
         {
-            layoutElement: "About",
-            page: "/about"
-        },
-        {
-            layoutElement: "Instagram",
-            page: "/instagram"
-        },
-        {
             layoutElement: "Color",
             page: "/color-in-all-its-glory"
         },
@@ -70,6 +62,10 @@ context('HomePage Redirections', () => {
         {
             layoutElement: "Breakfast",
             page: "/breakfast"
+        },
+        {
+            layoutElement: "Black & White",
+            page: "/black-white-superb-art"
         }
     ].forEach((scenario) => {
         it(`The ${scenario.layoutElement} layout element redirects to the expected location`, () => {

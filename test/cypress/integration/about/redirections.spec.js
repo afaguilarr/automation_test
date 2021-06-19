@@ -1,22 +1,22 @@
-context('HomePage Redirections', () => {
+context('Projects Redirections', () => {
     beforeEach(() => {
-        // Given the home page is shown
-        cy.visit('/')
+        // Given the About page is shown
+        cy.visit('/about')
     });
 
     // This list parametrizes the test case below and basically represents our gherkin table
     [
         {
-            navigationItem: "Projects",
-            page: "/projects"
+            navigationItem: "Logo",
+            page: "/"
         },
         {
             navigationItem: "Instagram",
             page: "/instagram"
         },
         {
-            navigationItem: "About",
-            page: "/about"
+            navigationItem: "Projects",
+            page: "/projects"
         }
     ].forEach((scenario) => {
         it(`The sidebar ${scenario.navigationItem} navigation item redirects to the expected location`, () => {
@@ -52,29 +52,18 @@ context('HomePage Redirections', () => {
     // This list parametrizes the test case below and basically represents our gherkin table
     [
         {
-            layoutElement: "About",
-            page: "/about"
+            footerItem: "Theme",
+            page: "https://github.com/LekoArts/gatsby-themes/tree/master/themes/gatsby-theme-jodie"
         },
         {
-            layoutElement: "Instagram",
-            page: "/instagram"
-        },
-        {
-            layoutElement: "Color",
-            page: "/color-in-all-its-glory"
-        },
-        {
-            layoutElement: "Extreme Neon",
-            page: "/extreme-neon-what-is-this-trend-about"
-        },
-        {
-            layoutElement: "Breakfast",
-            page: "/breakfast"
+            footerItem: "LekoArts",
+            page: "https://www.lekoarts.de/"
         }
+
     ].forEach((scenario) => {
-        it(`The ${scenario.layoutElement} layout element redirects to the expected location`, () => {
-            // When a visitor clicks on the <layout_element> layout element
-            cy.clickLayoutElement(scenario.layoutElement)
+        it(`The ${scenario.footerItem} footer item redirects to the expected location`, () => {
+            // When a visitor clicks on the <footer_item> footer item
+            cy.clickFooterItem(scenario.footerItem)
 
             // Then the <page> page is shown
             cy.pageIsShown(scenario.page)
