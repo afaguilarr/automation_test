@@ -1,0 +1,16 @@
+{
+  "name": "cypress_with_reporting",
+  "version": "1.0.0",
+  "description": "Cypress tests",
+  "main": "index.js",
+  "scripts": {
+    "test": "(rm -r cypress/report cypress/screenshots cypress/videos; npx cypress run --browser ${BROWSER=electron} --${HEADLESS=headless} ; npx mochawesome-merge \"cypress/report/.jsons/*.json\" > cypress/report/mochawesome.json ; ( cd cypress/report ; npx marge mochawesome.json ))"
+  },
+  "keywords": [],
+  "author": "Andres Felipe Aguilar Rendon",
+  "private": true,
+  "devDependencies": {
+    "cypress": "7.4.0",
+    "cypress-mochawesome-reporter": "2.0.1"
+  }
+}
