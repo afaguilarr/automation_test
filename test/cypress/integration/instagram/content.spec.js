@@ -1,11 +1,11 @@
-context('Projects Content', () => {
+context('Instagram Content', () => {
 
-    it(`The Projects page content is correctly shown`, () => {
-        // When a visitor requests the Projects page
-        cy.visit('/projects')
+    it(`The Instagram page content is correctly shown`, () => {
+        // When a visitor requests the Instagram page
+        cy.visit('/instagram')
 
-        // Then the Projects page is shown
-        cy.pageIsShown('/projects')
+        // Then the Instagram page is shown
+        cy.pageIsShown('/instagram')
     });
 
 })

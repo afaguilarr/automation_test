@@ -94,6 +94,7 @@ function assertProjectsPageElements() {
 
 function assertInstagramPageElements() {
     assertHeaderAndFooter("rgb(0, 0, 0)")
+    cy.get('.instagram-grid').should('be.visible')
 }
 
 function assertAboutPageElements() {
