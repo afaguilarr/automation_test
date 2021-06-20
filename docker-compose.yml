@@ -34,7 +34,7 @@ services:
     # see https://docs.docker.com/compose/networking/
     environment:
       - CYPRESS_baseUrl=http://webapp:8000
-    command: bash -c "(npx wait-on http://webapp:8000 ; rm -r cypress/report cypress/screenshots cypress/videos ; npx cypress run --browser ${BROWSER:-electron} --headless)"
+    command: bash -c "(npx wait-on http://webapp:8000 ; rm -r cypress/report cypress/screenshots cypress/videos ; npx cypress run --browser ${BROWSER:-electron} --headless ; npx mochawesome-merge cypress/report/.jsons/*.json > cypress/report/mochawesome.json ; ( cd cypress/report ; npx marge mochawesome.json ))"
     # mount the host directory cypress and the file cypress.json as
     # volumes within the container
     # this means that:

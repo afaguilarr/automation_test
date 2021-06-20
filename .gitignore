@@ -73,3 +73,4 @@ public
 # Cypress tests results files and directories
 **/videos
 **/screenshots
+**/report

@@ -13,7 +13,8 @@
     "build:cypress": "cross-env CYPRESS_SUPPORT=y yarn build",
     "start": "gatsby develop",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "test": "(cd test ; rm -r cypress/report cypress/screenshots cypress/videos; npx cypress run --browser ${BROWSER=electron} --${HEADLESS=headless} ; npx mochawesome-merge \"cypress/report/.jsons/*.json\" > cypress/report/mochawesome.json ; ( cd cypress/report ; npx marge mochawesome.json ))"
   },
   "dependencies": {
     "@lekoarts/gatsby-theme-jodie": "^1.0.3",
