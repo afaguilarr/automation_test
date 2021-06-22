@@ -20,6 +20,13 @@ services:
     # we can see the server running at "localhost:8000"
     ports:
       - "8000:8000"
+    # This is supposed to be here to restart the server if it goes down
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
   cypress:
     image: cypress

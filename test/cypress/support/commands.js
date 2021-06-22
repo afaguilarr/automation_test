@@ -24,6 +24,13 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+import {
+    assertAboutPageElements, assertBlackPageElements, assertBreakfastPageElements, assertColorsPageElements,
+    assertHomePageElements,
+    assertInstagramPageElements, assertNeonPageElements, assertNotFoundPageElements,
+    assertProjectsPageElements
+} from "./commonAssertions";
+
 Cypress.Commands.add('clickNavigationItem', (navigationItem) => {
     if (navigationItem === "Logo") {
         cy.get(`[aria-label="Jodie, Back to Home"]`).click()
@@ -65,88 +72,11 @@ Cypress.Commands.add('pageIsShown', (url) => {
     }
 })
 
-function assertHeaderAndFooter(color) {
-    cy.get(`[data-testid="sidebar"]`)
-        .should('be.visible')
-        .should('have.css', 'background-color', color)
-    cy.get('footer')
-        .should('be.visible')
-        .should('have.css', 'background-color', color)
-
-}
-
-function assertHomePageElements() {
-    assertHeaderAndFooter("rgb(255, 255, 255)")
-    cy.get(`[data-testid="About"] span`).should('contain', 'About')
-    cy.get(`[data-testid="Instagram"] span`).should('contain', 'Instagram')
-    cy.get(`[data-testid="Color"] span`).should('contain', 'Color')
-    cy.get(`[data-testid="Extreme Neon"] span`).should('contain', 'Extreme Neon')
-    cy.get(`[data-testid="Breakfast"] span`).should('contain', 'Breakfast')
-}
-
-function assertProjectsPageElements() {
-    assertHeaderAndFooter("rgb(255, 255, 255)")
-    cy.get(`[data-testid="Color"] span`).should('contain', 'Color')
-    cy.get(`[data-testid="Extreme Neon"] span`).should('contain', 'Extreme Neon')
-    cy.get(`[data-testid="Breakfast"] span`).should('contain', 'Breakfast')
-    cy.get(`[data-testid="Black & White"] span`).should('contain', 'Black & White')
-}
-
-function assertInstagramPageElements() {
-    assertHeaderAndFooter("rgb(0, 0, 0)")
-    cy.get('.instagram-grid').should('be.visible')
-}
-
-function assertAboutPageElements() {
-    assertHeaderAndFooter("rgb(255, 255, 255)")
-    cy.get('h1').should('contain', "About")
-}
-
-function assertColorsPageElements() {
-    cy.fixture('colorsInfo.json').then((colorsInfo) => {
-        assertHeaderAndFooter(colorsInfo.color)
-        cy.contains(colorsInfo.subTitle).should('be.visible')
-        cy.get('h1').should('contain', colorsInfo.title)
-        cy.contains(colorsInfo.firstParagraph).should('be.visible')
-        cy.contains(colorsInfo.secondParagraph).should('be.visible')
-        cy.contains(colorsInfo.thirdParagraph).should('be.visible')
-        cy.get('main .gatsby-image-wrapper').should('have.length', colorsInfo.numberOfImages)
+Cypress.Commands.add('setInstaNodes', (numberOfInstaNodes) => {
+    cy.fixture('mockInstaNodes.json').then((mockInstaNodes) => {
+        cy.task("generateFakeInstaNodes", { baseData: mockInstaNodes, numberOfInstaNodes: numberOfInstaNodes })
+            .then((instaNodes) => {
+                cy.wrap(instaNodes).as('instaNodes')
+            })
     })
-}
-
-function assertNeonPageElements() {
-    cy.fixture('neonInfo.json').then((neonInfo) => {
-        assertHeaderAndFooter(neonInfo.color)
-        cy.contains(neonInfo.subTitle).should('be.visible')
-        cy.get('h1').should('contain', neonInfo.title)
-        cy.contains(neonInfo.firstParagraph).should('be.visible')
-        cy.contains(neonInfo.secondParagraph).should('be.visible')
-        cy.get('main .gatsby-image-wrapper').should('have.length', neonInfo.numberOfImages)
-    })
-}
-
-function assertBreakfastPageElements() {
-    cy.fixture('breakfastInfo.json').then((breakfastInfo) => {
-        assertHeaderAndFooter(breakfastInfo.color)
-        cy.contains(breakfastInfo.subTitle).should('be.visible')
-        cy.get('h1').should('contain', breakfastInfo.title)
-        cy.contains(breakfastInfo.firstParagraph).should('be.visible')
-        cy.get('main .gatsby-image-wrapper').should('have.length', breakfastInfo.numberOfImages)
-    })
-}
-
-function assertBlackPageElements() {
-    cy.fixture('blackInfo.json').then((blackInfo) => {
-        assertHeaderAndFooter(blackInfo.color)
-        cy.contains(blackInfo.subTitle).should('be.visible')
-        cy.get('h1').should('contain', blackInfo.title)
-        cy.get('main p').should('contain', blackInfo.firstParagraph)
-        cy.get('main .gatsby-image-wrapper').should('have.length', blackInfo.numberOfImages)
-    })
-}
-
-function assertNotFoundPageElements() {
-    assertHeaderAndFooter("rgb(255, 255, 255)")
-    cy.get('h1').should('contain', "404")
-    cy.get('p').should('contain', "Page not found.")
-}
+})

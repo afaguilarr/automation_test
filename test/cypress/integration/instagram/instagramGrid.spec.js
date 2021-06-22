@@ -1,14 +1,8 @@
 context('Instagram Grid', () => {
 
     it(`The Instagram grid shows the requested instagram info`, () => {
-
         // Given that there are some random instagram posts
-        cy.fixture('mockInstaNodes.json').then((mockInstaNodes) => {
-            cy.task("generateFakeInstaNodes", { baseData: mockInstaNodes })
-                .then((instaNodes) => {
-                    cy.wrap(instaNodes).as('instaNodes')
-                })
-        })
+        cy.setInstaNodes(undefined)
 
         cy.get("@instaNodes").then((instaNodes) => {
             // Intercept request to get instaNodes data
@@ -24,14 +18,8 @@ context('Instagram Grid', () => {
     })
 
     it(`The Instagram grid elements redirect to the external instagram post`, () => {
-
         // Given that there is 1 instagram post
-        cy.fixture('mockInstaNodes.json').then((mockInstaNodes) => {
-            cy.task("generateFakeInstaNodes", { baseData: mockInstaNodes, numberOfInstaNodes: 1 })
-                .then((instaNodes) => {
-                    cy.wrap(instaNodes).as('instaNodes')
-                })
-        })
+        cy.setInstaNodes(1)
 
         cy.get("@instaNodes").then((instaNodes) => {
             // Intercept request to get instaNodes data
@@ -51,14 +39,8 @@ context('Instagram Grid', () => {
     })
 
     it(`Each Instagram grid element contains the expected info`, () => {
-
         // Given that there is 1 instagram post
-        cy.fixture('mockInstaNodes.json').then((mockInstaNodes) => {
-            cy.task("generateFakeInstaNodes", { baseData: mockInstaNodes, numberOfInstaNodes: 1 })
-                .then((instaNodes) => {
-                    cy.wrap(instaNodes).as('instaNodes')
-                })
-        })
+        cy.setInstaNodes(1)
 
         cy.get("@instaNodes").then((instaNodes) => {
             // Intercept request to get instaNodes data
@@ -69,19 +51,17 @@ context('Instagram Grid', () => {
 
             // Then the instagram grid element contains the expected info
             // And the expected elements are hidden
-            const caption = instaNodes["data"]["instagram"]["nodes"][0]["caption"]
-            const likes = instaNodes["data"]["instagram"]["nodes"][0]["likes"]
-            let timestamp = instaNodes["data"]["instagram"]["nodes"][0]["timestamp"]
+            const instaNodeObject = instaNodes["data"]["instagram"]["nodes"][0]
+            const caption = instaNodeObject["caption"]
+            const likes = instaNodeObject["likes"]
+            // Got this calculation from the development code
+            const timestamp = new Date(instaNodeObject["timestamp"] * 1000).toLocaleDateString(`de-DE`)
             cy.get('.instagram-title')
                 .should('contain', caption)
                 .should('be.hidden')
             cy.get('.instagram-heart')
                 .should('contain', likes)
                 .should('be.hidden')
-            // Got this calculation from the development code, the commented code below is what
-            // I think should be the actual calculation though
-            timestamp = new Date(timestamp * 1000).toLocaleDateString(`de-DE`)
-            //timestamp = new Date(timestamp).toLocaleDateString(`de-DE`)
             cy.get('.instagram-bottom > :nth-child(2)')
                 .should('contain', timestamp)
                 .should('be.hidden')
@@ -89,14 +69,8 @@ context('Instagram Grid', () => {
     })
 
     it(`Hovering over each Instagram grid element shows the expected info`, () => {
-
         // Given that there is 1 instagram post
-        cy.fixture('mockInstaNodes.json').then((mockInstaNodes) => {
-            cy.task("generateFakeInstaNodes", { baseData: mockInstaNodes, numberOfInstaNodes: 1 })
-                .then((instaNodes) => {
-                    cy.wrap(instaNodes).as('instaNodes')
-                })
-        })
+        cy.setInstaNodes(1)
 
         cy.get("@instaNodes").then((instaNodes) => {
             // Intercept request to get instaNodes data

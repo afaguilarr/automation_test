@@ -40,8 +40,8 @@ module.exports = (on, config) => {
                 node["id"] = (Math.random() + 1).toString(36).substring(7);
                 // Generate a random number between 0 and 1000
                 node["likes"] = Math.floor(Math.random() * 1000)
-                // getTime() is necessary to fake the date in UTC milliseconds
-                node["timestamp"] = faker.datatype.datetime().getTime()
+                // getTime() is necessary to fake the date in UTC milliseconds, / 1000 to make it seconds
+                node["timestamp"] = faker.datatype.datetime().getTime() / 1000
                 node["localFile"] = baseNode["localFile"]
                 baseData["data"]["instagram"]["nodes"].push(node)
             }
