@@ -41,7 +41,7 @@ The automated tests created to test the provided site were developed using Cypre
   ├── docker-compose.yml => NEW
   ├── gatsby-config.js
   ├── package-lock.json
-  ├── package.json
+  ├── package.json => MODIFIED
   ├── public
   ├── src
   ├── static
