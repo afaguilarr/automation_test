@@ -130,3 +130,8 @@ The automated tests created to test the provided site were developed using Cypre
     * After running the tests in this way, the `test/cypress/report`, `test/cypress/screenshots` and `test/cypress/videos` folders will be created, please check them for any necessary extra info, a really useful mochawesome HTML report is being generated in the `test/cypress/mochawesome-report/mochawesome.html` file!
     * Check the `Dockerfile` and `test/Dockerfile` files to check how the `docker-compose build` command works. 
     * Check the `command` sections in the `docker-compose.yml` file to check how the `docker-compose up` command works.
+
+### Notes:
+
+* I tried to add CI support for Travis using the docker build but for some reason the `gatsby-source-instagram` plugin is just not working there.
+  * I could try to execute things there using npm or yarn but I don't think it's so important to invest more time on it.
