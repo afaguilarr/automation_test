@@ -48,6 +48,7 @@ The automated tests created to test the provided site were developed using Cypre
   └── test => NEW 
   ```
   * The `README.md` file was of course modified in order to explain the work done.
+  * The `package.json` file was modified to add a new script to run the tests.
   * Some `docker` files were added in order to make this executable for someone without `node/npm/yarn` installed on their machine or probably for Continuous integration purposes.
     * A `Dockerfile` to build the UI code.
     * A `docker-compose.yml` file to configure the swarming between the UI and the tests execution.
